@@ -24,8 +24,12 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 // import routes
 const sidebar = require("./controller/sidebar");
+const TelegramChannel = require("./controller/telegramChannel");
+const User = require("./controller/user");
 
-app.use("/api/v2/user", sidebar);
+app.use("/api/v2/sidebar", sidebar);
+app.use("/api/v2/media", TelegramChannel);
+app.use("/api/v2/user", User);
 
 // it's for ErrorHandling
 app.use(ErrorHandler);

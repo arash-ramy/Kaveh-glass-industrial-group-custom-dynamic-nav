@@ -254,7 +254,7 @@ router.patch(
       const { row, floor, newCaption, newRow, parentId } = req.body;
       console.log(req.body, "req.body");
       if (!row || !floor) {
-        return res.status(400).json({
+        return res.json({
           message: "please inter inputs",
         });
       }
