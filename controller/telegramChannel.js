@@ -14,8 +14,11 @@ router.post(
     "/create-telegram-channel",
     catchAsyncErrors(async (req, res, next) => {
       try {
-        const data = "اين يك پست است و نياز به  ديده شدن دارد";
-        data.replace(" ", "-");
+
+      const { name, userCreater, row, tags } = req.body;
+        
+
+
       } catch (error) {
         return next(new ErrorHandler(error.message, 500));
       }
