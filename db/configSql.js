@@ -14,7 +14,7 @@ module.exports={
         user: "rahimi",
         password: 'Keep055',
         server: 'AR-RAHIMI', 
-        database: 'events' ,
+        database: 'ARASH' ,
 
         trustServerCertificate:true,
     

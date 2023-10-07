@@ -15,10 +15,10 @@ router.post(
     catchAsyncErrors(async (req, res, next) => {
       try {
 
-      const { name, userCreater, row, tags } = req.body;
-        
+      const { name, userCreater, promotedBycustomer, category, reports } = req.body;
+        console.log(req.body)
 
-
+        return res.json({status:200, message:"successfully"})
       } catch (error) {
         return next(new ErrorHandler(error.message, 500));
       }

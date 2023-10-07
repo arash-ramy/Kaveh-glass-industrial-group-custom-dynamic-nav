@@ -1,0 +1,8 @@
+ CREATE TABLE Posts (
+            Id int  IDENTITY(2023,1) PRIMARY KEY ,
+            creater_id int NOT NULL,
+            content varchar(255),
+            rating text[],
+            published_date DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP
+            FOREIGN KEY (creater_id)
+          )

@@ -8,9 +8,13 @@ const telegramChannelSchema = new mongoose.Schema({
   tags: {
     type: [],
   },
+  Rule:{
+    type:String ,
+    default: 'user'
+  },
   userCreater:{
     type:mongoose.Shcema.Types.ObjectId,
-    ref:"user"
+    ref:"User"
   },
   promotedBycustomer:{
       type:[]
@@ -23,8 +27,8 @@ const telegramChannelSchema = new mongoose.Schema({
     type: Number,
     
   },
-  reported:{
-    type:
+  reports:{
+    type:[]
   }
 
   

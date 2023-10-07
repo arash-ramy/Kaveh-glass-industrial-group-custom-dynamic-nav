@@ -20,19 +20,38 @@ app.use("/test", (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 // config
-const eventData = require("./events/index");
-eventData.getEvents()
+// const eventData = require("./events/index");
+// eventData.getEvents()
 
 // import routes
 const sidebar = require("./controller/sidebar");
 const TelegramChannel = require("./controller/telegramChannel");
+const userq = require("./controller/userq");
 const User = require("./controller/user");
+
 const Events = require("./controller/eventController");
 
-// app.use("/api/v2/sidebar", sidebar);
-// app.use("/api/v2/media", TelegramChannel);
-// app.use("/api/v2/user", User);
+
+const CreateTable = require("./utils/createTable");
+
+app.use("/api/v1/db", CreateTable);
+
+
+
+app.use("/api/v2/sidebar", sidebar);
+app.use("/api/v2/media", TelegramChannel);
+
+app.use("/api/v2/userq", userq);
+app.use("/api/v2/user", User);
+
+
+
 app.use("/api/v2/events", Events);
+
+
+
+
+
 
 // it's for ErrorHandling
 app.use(ErrorHandler);
