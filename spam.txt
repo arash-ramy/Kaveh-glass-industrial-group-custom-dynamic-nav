@@ -6,3 +6,16 @@
             published_date DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP
             FOREIGN KEY (creater_id)
           )
+
+
+          
+     CREATE TABLE Users (
+     Id int  IDENTITY(1, 1) PRIMARY KEY ,
+     Name varchar(100)  NULL,
+	 Password varchar (150) NOT NULL,
+     Email varchar(100) NOT NULL ,
+     PhoneNumber int  NULL ,
+     Created_at  DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP
+
+   )
+         
