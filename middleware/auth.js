@@ -3,6 +3,7 @@ const catchAsyncErrors = require("./catchAsyncErrors");
 const jwt = require("jsonwebtoken");
 const User = require("../model/user.js");
 const sql = require("mssql");
+const config = require("../db/configSql");
 
 exports.isAuthenticated = catchAsyncErrors(async(req,res,next) => {
     const {token} = req.cookies;
@@ -21,8 +22,9 @@ console.log(token,"token")
 });
 
 exports.isAuthenticatedQ = catchAsyncErrors(async(req,res,next) => {
+    console.log(res.cookie)
     console.log(req.cookies)
-    const {aras} = req.cookies;
+    const {token} = req.cookies;
 console.log("middleware")
 console.log("tokenMiddleware")
 
@@ -39,13 +41,13 @@ console.log("tokenMiddleware")
 
         let findGmail = await connection.query(`
 
-        SELECT * FROM Users WHERE  Id='${decoded}
+        SELECT * FROM Users WHERE Id='${decoded.id}'
                      `);
 
-                    
-     
+                    console.log(findGmail,"findGmail")
+        return  findGmail.recordset[0]
       });
-      console.log(req.user)
+    //   console.log(req.user)
     // req.user = await User.findById(decoded.id);
 
     next();
