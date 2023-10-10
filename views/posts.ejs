@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sed</title>
+    <link rel="stylesheet"  href="/posts.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="first">first</div>
+        <div class="seconde">
+            <% for (item of posts) { %>
+                <div class="card">
+                <div class="header">
+                    <span class="category">technology</span>
+                </div>
+                <div class="content">     <h3 class="h3"><%= item.Title %></h3>
+                    <p class="pContent">   <%= item.Content %> </p>
+                    <a class="link" href="<%=item.Slug%>">ReadMore</a></div>
+           
+                <div class="footer">
+                    <span class="tags">tags</span>  <span class="tags">tags</span>  <span class="tags">tags</span>
+                </div>
+            </div>
+            <% } %>
+            
+        </div>
+        
+      </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ul>
+        <% for (item of posts) { %>
+          <li> <%= item.Title %> </li>
+        <% } %>
+      </ul> -->

@@ -25,9 +25,8 @@ exports.isAuthenticatedQ = catchAsyncErrors(async(req,res,next) => {
     console.log(res.cookie)
     console.log(req.cookies)
     const {token} = req.cookies;
-console.log("middleware")
-console.log("tokenMiddleware")
-
+    console.log("middleware")
+    console.log("tokenMiddleware")
     if(!token){
         return next(new ErrorHandler("Please login to continue", 401));
     }
@@ -47,8 +46,8 @@ console.log("tokenMiddleware")
                     console.log(findGmail,"findGmail")
         return  findGmail.recordset[0]
       });
-    //   console.log(req.user)
-    // req.user = await User.findById(decoded.id);
+        //   console.log(req.user)
+        // req.user = await User.findById(decoded.id);
 
     next();
 });
@@ -76,4 +75,6 @@ console.log("tokenMiddleware")
 //     }
 // }
 
+
+//stored procedures    -->  GetInvUnits
 

@@ -1,0 +1,21 @@
+body {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+  .container{
+    background-color: rgb(209, 105, 0);
+    width: 100%;
+    display: flex;
+    max-width: 1200px;
+ 
+  }
+.first{
+    background-color: darkblue;
+    flex: 4;
+     }
+     .seconde{
+    flex: 1;
+     }

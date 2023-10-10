@@ -19,3 +19,35 @@
 
    )
          
+
+         
+          
+     CREATE TABLE Posts (
+     Id int  IDENTITY(20231, 1) PRIMARY KEY ,
+     Status bit NOT NULL DEFAULT 0
+     Content TEXT NULL,
+     Created_at  datetimeoffset NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+      Createdby int NOT NULL FOREIGN KEY REFERENCES Users(Id),
+
+   )
+          CREATE TABLE Categories (
+     Id int  IDENTITY(20231, 1) PRIMARY KEY ,
+     Categoryname varchar(100) NOT NULL 
+   )
+                
+     CREATE TABLE Poststags (
+     Id int  IDENTITY(20231, 1) PRIMARY KEY ,
+     Tag varchar(100) NOT NULL 
+     PostId int NOT NULL FOREIGN KEY REFERENCES Posts(Id),
+      CategoriesId int NOT NULL FOREIGN KEY REFERENCES Categories(Id),
+   )
+
+    CREATE TABLE Comments (
+     Id int  IDENTITY(20231, 1) PRIMARY KEY ,
+     Content varchar(8000) NOT NULL
+     Postid int NOT NULL FOREIGN KEY REFERENCES Posts(Id),
+     Userid int NOT NULL FOREIGN KEY REFERENCES Users(Id),
+     Commentparent int NOT NULL FOREIGN KEY REFERENCES Comments(Id)
+     Created_at  DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP
+         )
+         also we can use comment type that help to understanding better

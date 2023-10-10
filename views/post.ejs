@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sed</title>
+    <link rel="stylesheet"  href="/singlepost.css">
+
+  </head>
+  <body>
+    <div class="container">
+        <div class="first">
+            <span></span>
+
+                     <% for (item of posts) { %>
+
+            <div class="header">
+                <h1><%= item.Title %></h1>
+                <div>
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <%= user[0].Email %>
+                        <span> <%= item.Created_at.getFullYear()+" "+item.Created_at.getMonth()+" "+item.Created_at.getDate() %></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad totam quae expedita amet odio? Consequuntur aut nisi fugit sunt quidem, assumenda, explicabo distinctio magni, modi nemo dolor fuga exercitationem neque.</p>
+            <div>
+                <img src="" alt="">
+            </div>     
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, animi nihil. Quos deleniti quibusdam quod ipsum esse iste. Inventore, saepe. Illum consequatur debitis animi eius sint assumenda exercitationem nihil quasi!</p>
+            </div>
+          
+                   <% } %>
+                <div class="comment">
+                        <div>
+                            <form method="POST" action="/api/v2/comments">
+                            <input type="text">
+                            <button>click</button>
+
+                        </form>
+                        </div>
+                </div>
+        </div>
+        <div class="seconde">
+       
+        </div>
+    </div>
+  </body>
+</html>
+
+//
+<!-- <ul>
+//         <% for (item of posts) { %>
+//           <li> <%= item.Title %> </li>
+//         <% } %>
+//       </ul> -->
