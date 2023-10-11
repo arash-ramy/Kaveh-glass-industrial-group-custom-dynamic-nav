@@ -6,7 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sed</title>
     <link rel="stylesheet"  href="/singlepost.css">
+    <script>
+function CommentResponse() {
+console.log( "<%    posts.Slug   %>")  
+console.log( <%    posts.Slug   %>)  
+console.log( 'srfhk')   
 
+ 
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+    </script>
   </head>
   <body>
     <div class="container">
@@ -37,17 +52,43 @@
           
                    <% } %>
                 <div class="comment">
-                        <div>
+                        <!-- <div>
                             <form method="POST" action="/api/v2/comments">
-                            <input type="text">
-                            <button>click</button>
+                            <input type="text" name="comment">
+                            <input type="text" name="postId" value="<%= item.Id %>" style="display:none ;" >
+                            <input type="text" name="postSlug" value="<%= item.Slug %>" style="display:none ;" >
+
+                            <button >click</button>
 
                         </form>
-                        </div>
+                        </div> -->
+                        <!-- <% for (item of comment) { %>
+                            <span onclick="CommentResponse()">response</span>
+                            <h1 ><%= item.Content %></h1>
+                            <input  id="myDIV" type="text">
+
+                            <% } %> -->
+
+                            <!-- test sending request -->
+                            <div>
+                              <form method="POST" action="http://localhost:4000/unit/view">
+                                
+                              <input type="text" name="unitName">
+                              <input type="text" name="unitManager">
+
+  
+                              <button >click</button>
+  
+                          </form>
+                          </div>
+
+
+                            <!-- end test sending request -->
+
                 </div>
         </div>
         <div class="seconde">
-       
+       <p id="demo"></p>
         </div>
     </div>
   </body>
@@ -59,3 +100,7 @@
 //           <li> <%= item.Title %> </li>
 //         <% } %>
 //       </ul> -->
+<!-- for (i=0;i<comment.length;i++) { -->
+
+
+  <!-- http://localhost:4000/unit/view -->

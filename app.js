@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public/styles'));
-
+app.use(express.static(__dirname + '/public/script'));
 console.log(path.join(__dirname, 'public'),"*************************") 
 console.log(__dirname + '/public',"*************************") 
 
@@ -52,7 +52,7 @@ const User = require("./controller/user");
 const Events = require("./controller/eventController");
 
 const CreateTable = require("./utils/createTable");
-const Comment = require("./controller/comment");
+const Comment = require("./controller/commentq");
 
 app.use("/api/v1/db", CreateTable);
 
@@ -64,7 +64,6 @@ app.use("/api/v2/postq", PostQ);
 
 app.use("/api/v2/user", User);
 app.use("/api/v2/comments", Comment);
-
 app.use("/api/v2/events", Events);
 
 

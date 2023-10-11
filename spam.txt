@@ -47,7 +47,27 @@
      Content varchar(8000) NOT NULL
      Postid int NOT NULL FOREIGN KEY REFERENCES Posts(Id),
      Userid int NOT NULL FOREIGN KEY REFERENCES Users(Id),
-     Commentparent int NOT NULL FOREIGN KEY REFERENCES Comments(Id)
+     Commentparent int  NULL 
      Created_at  DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP
          )
          also we can use comment type that help to understanding better
+
+
+
+
+
+create procedure [dbo].[Update-unit]  (@UnitID int,@unitId int,@unitId int,@unitId int)
+
+AS
+
+UPDATE [dbo].[Unit]
+   SET 
+      ,[UnitManager] = 
+      ,[CreateDate] = <CreateDate, datetime,>
+      ,[CreateBy] = <CreateBy, nvarchar(255),>
+      ,[ModifiedDate] = <ModifiedDate, datetime,>
+      ,[ModifiedBy] = 
+ WHERE UnitID=@UnitID
+GO
+
+

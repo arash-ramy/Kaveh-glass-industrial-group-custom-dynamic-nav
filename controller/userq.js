@@ -7,7 +7,7 @@ const { isAuthenticatedQ } = require("../middleware/auth");
 
 const config = require("../db/configSql");
 const jwt = require("jsonwebtoken");
-var  sp = require('../Procedure/sp');
+var sp = require("../Procedure/sp");
 
 const sql = require("mssql");
 const bcrypt = require("bcryptjs");
@@ -278,18 +278,14 @@ router.post(
 
         const onMind = findGmail.recordset[0].Verificationdate;
         console.log(new Date().getMinutes(), "getMinutes");
-       
+
         // console.log(onMind,"onMind")
         console.log(findGmail.recordset[0].Verificationdate, "db");
         console.log(new Date(), "now");
         // console.log(verificationDateExp,"verificationDateExp")
-        const verificationDateExp = new Date(
-          onMind.getTime() + 5 * 1000
-        );
+        const verificationDateExp = new Date(onMind.getTime() + 5 * 1000);
         if (verificationDateExp < new Date()) {
-         
-          
-          return res.json({message:"كد تاييد منقضي شده است"})
+          return res.json({ message: "كد تاييد منقضي شده است" });
         }
         console.log(findGmail.recordset[0]);
 
@@ -355,49 +351,73 @@ router.post(
   catchAsyncErrors(async (req, res, next) => {
     try {
       const { email, password } = req.body;
+      // SELECT Email, Password ,Id FROM Users WHERE  Email
 
-      const myquery = await sql.connect(config.sql).then(async () => {
-        let connection = new sql.Request();
 
-        let findGmail = await connection.query(`
 
-        SELECT Email, Password ,Id FROM Users WHERE  Email='${email}'
+      let pool = await sql.connect(config.sql);
+      let ex = await pool.request()
+      .input('Email', email)
+
+
+      ex.execute("Login").then((resp) => {
+        return res.json({
+          message: "successfully test",
+          status: 200,
+          res: resp.recordsets,
+        });
+      })
+
+      console.log(ex,"ex");
+      console.log(pool,"pool");
+      
+
+
+
+
+
+      // const myquery = await sql.connect(config.sql).then(async () => {
+      //   let connection = new sql.Request();
+          
+      //   let findGmail = await connection.query(`
+
+      //   SELECT Email, Password ,Id FROM Users WHERE  Email='${email}'
   
-                     `);
-        console.log(findGmail.recordset[0]);
-        if (findGmail.recordset[0].length === 0) {
-          return res.json({ message: "user not found code:98765" });
-        }
-        return findGmail.recordset[0];
-      });
-      console.log(myquery.Password);
+      //                `);
+      //   console.log(findGmail.recordset[0]);
+      //   if (findGmail.recordset[0].length === 0) {
+      //     return res.json({ message: "user not found code:98765" });
+      //   }
+      //   return findGmail.recordset[0];
+      // });
+      // console.log(myquery.Password);
 
-      const comparePassword = await bcrypt.compare(password, myquery.Password);
+      // const comparePassword = await bcrypt.compare(password, myquery.Password);
 
-      if (!comparePassword) {
-        return res.json({ message: "password is not correct" });
-      }
+      // if (!comparePassword) {
+      //   return res.json({ message: "password is not correct" });
+      // }
 
-      const options = {
-        expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
-        sameSite: "none",
-        // secure: true,
-      };
+      // const options = {
+      //   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+      //   httpOnly: true,
+      //   sameSite: "none",
+      //   // secure: true,
+      // };
 
-      const jwtvar = jwt.sign({ id: myquery.Id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: process.env.JWT_EXPIRES,
-      });
-      // const decoded = jwt.verify(jwtvar, process.env.JWT_SECRET_KEY);
+      // const jwtvar = jwt.sign({ id: myquery.Id }, process.env.JWT_SECRET_KEY, {
+      //   expiresIn: process.env.JWT_EXPIRES,
+      // });
+      // // const decoded = jwt.verify(jwtvar, process.env.JWT_SECRET_KEY);
 
-      // console.log(decoded.id,"decoded_____________");
+      // // console.log(decoded.id,"decoded_____________");
 
-      // res.cookie("token",jwtvar,options)
+      // // res.cookie("token",jwtvar,options)
 
-      // console.log(CreartUser);
-      return res
-        .cookie("token", jwtvar, options)
-        .json({ message: "successfully log in", status: 200 });
+      // // console.log(CreartUser);
+      // return res
+      //   .cookie("token", jwtvar, options)
+      //   .json({ message: "successfully log in", status: 200 });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -413,12 +433,16 @@ router.get(
   // isAuthenticatedQ,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      let  pool = await  sql.connect(config.sql);
-      let  ex = await  pool.request()
+      let pool = await sql.connect(config.sql);
+      let ex = await pool.request()
+      
 
-      ex.execute('Test').then((resp)=>{
-        return res.json({ message: "successfully test", status: 200 ,
-      res:resp});
+      ex.execute("Test").then((resp) => {
+        return res.json({
+          message: "successfully test",
+          status: 200,
+          res: resp,
+        });
       });
 
       // return res.json({ message: "successfully test", status: 200 });
@@ -436,12 +460,12 @@ router.get(
 //             let  request1 = await  sql.connect(config.sql);
 
 //       var request = new pp.Request();
-        
-//       let query = "exec Test ";  
-//       request.query(query, function (err, recordset) {  
-//         if (err) {  
-//             console.log(err);  
-//             sql.close();  
+
+//       let query = "exec Test ";
+//       request.query(query, function (err, recordset) {
+//         if (err) {
+//             console.log(err);
+//             sql.close();
 //         }    })
 
 //       return res.json({ message: "successfully test", status: 200 });
@@ -450,7 +474,6 @@ router.get(
 //     }
 //   })
 // );
-
 
 // sync  function  getOrder(productId) {
 //   try {
@@ -476,18 +499,13 @@ router.get(
 //   }
 // }
 
-
-
-
-
-
 // router.get(
 //   "/testp",catchAsyncErrors(async (req, res, next) => {
 //     try {
 //       let  pool = await  sql.connect(config.sql);
 //       let  products = await  pool.request()
 //       pool.T
-     
+
 //     } catch (error) {
 //       console.log(error);
 //     }
@@ -502,40 +520,7 @@ router.get(
 //   })
 // );
 // // router.route('/orders').get((request, response) => {
-  
+
 // // })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;

@@ -62,26 +62,30 @@ router.get(
           SELECT Email FROM Users WHERE Id='${foundedUserId}'
 
                                  `);
-        console.log(fetchingUser.recordset[0], "fetchingUser");
+        let fetchingComments = await connection.query(`
+          SELECT * FROM Comments  
+
+                                 `);
+        console.log(fetchingComments.recordset[0], "fetchingComments");
         // return fetchingSlug.recordset;
         return {
-            post: fetchingSlug.recordset,
-            user: fetchingUser.recordset,
+          post: fetchingSlug.recordset,
+          user: fetchingUser.recordset,
+          comment: fetchingComments.recordset,
         };
       });
-      console.log( "-");
+      console.log("-");
 
       console.log(inoo.post[0], "post");
       console.log(inoo.user[0], "user");
 
       const date = new Date();
-      console.log(   
-       parseInt(date.getMonth())+1.
-      )
+      console.log(parseInt(date.getMonth()) + 1);
 
       return res.render("post.ejs", {
         posts: inoo.post,
-        user:inoo.user
+        user: inoo.user,
+        comment:inoo.comment,
       });
 
       return res.json({ message: "successfully test post", status: 200 });
